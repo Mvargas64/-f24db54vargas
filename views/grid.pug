@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+
+  //- Show the query values (rows and cols)
+  p Rows: #{query.rows}, Cols: #{query.cols}
+
+  //- Convert query values to integers
+  - var rows = Number(query.rows)
+  - var cols = Number(query.cols)
+
+  //- Validate rows and cols
+  if error
+    p #{error}
+  else if !Number.isInteger(rows) || !Number.isInteger(cols)
+    p Rows and Columns must be integers.
+  else if rows < 3 || rows > 13
+    p Rows must be between 3 and 13.
+  else if cols < 3 || cols > 13
+    p Columns must be between 3 and 13.
+  else
+    //- If valid, create the table
+    table#outer
+      //- Generate table rows
+      - for (let i = 0; i < rows; i++) {
+        tr#middle
+          //- Generate table columns
+          - for (let j = 0; j < cols; j++) {
+            td= i * i + j
+          -}
+      -}

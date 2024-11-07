@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to LAB 10 page
+  button(type="button", onclick="boost()", class="btn btn-secondary") Sample Button
+
+  div#boost
+    p Add in extra
+
+    script.
+      let value = 0;
+      let amt = 3;
+
+      function boost() {
+        amt += 1;
+        value += amt;
+        document.getElementById("boost").textContent = `Boosted ${amt} by ${value}`;
+      }
+  
+  a(href='/discoveries') View Discoveries
